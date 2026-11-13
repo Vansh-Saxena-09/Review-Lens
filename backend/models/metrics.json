@@ -1,0 +1,51 @@
+{
+  "model_version": "tfidf-calibrated-linear-svm-v1",
+  "trained_rows": 32345,
+  "test_rows": 8087,
+  "seed": 42,
+  "positive_class": "CG",
+  "accuracy": 0.94707555335724,
+  "roc_auc": 0.9876958820278446,
+  "classification_report": {
+    "CG": {
+      "precision": 0.9535875564475664,
+      "recall": 0.9399109792284867,
+      "f1-score": 0.9466998754669987,
+      "support": 4044.0
+    },
+    "OR": {
+      "precision": 0.9407461594732992,
+      "recall": 0.9542418995795201,
+      "f1-score": 0.9474459724950884,
+      "support": 4043.0
+    },
+    "accuracy": 0.94707555335724,
+    "macro avg": {
+      "precision": 0.9471668579604329,
+      "recall": 0.9470764394040034,
+      "f1-score": 0.9470729239810436,
+      "support": 8087.0
+    },
+    "weighted avg": {
+      "precision": 0.947167651913504,
+      "recall": 0.94707555335724,
+      "f1-score": 0.9470728778516366,
+      "support": 8087.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      3801,
+      243
+    ],
+    [
+      185,
+      3858
+    ]
+  ],
+  "dataset_sha256": "ea03422988824bc917b5f7217e3867e27b597c647d5261adfae73cd7a85e1e1a",
+  "dataset_path_name": "reviews.csv",
+  "python": "3.12.10",
+  "sklearn": "1.6.1",
+  "preprocessing": "TF-IDF fit on training partition only; stratified 80/20 split"
+}
