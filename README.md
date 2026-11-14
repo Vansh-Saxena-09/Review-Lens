@@ -1,4 +1,4 @@
-# FAKE DECT
+# Review Lens (Fake review detection)
 
 A local review-text analysis website under reconstruction. The intended model estimates whether text resembles the computer-generated (CG) or original (OR) reviews in its training dataset. **It does not establish fraud or authenticity.**
 
