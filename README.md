@@ -47,3 +47,7 @@ Paste a direct supported Amazon `/dp/<ASIN>` or `/gp/product/<ASIN>` HTTPS link.
 The included CSV was downloaded from the [Fake-Reviews-Detection repository](https://github.com/SayamAlt/Fake-Reviews-Detection). Its SHA-256 is `ea03422988824bc917b5f7217e3867e27b597c647d5261adfae73cd7a85e1e1a`. The repository states CC BY 4.0 generally but does not establish the dataset's provenance; verify rights independently before reuse or redistribution. The model's training split is a random stratified review-level split; related or duplicated reviews can cross partitions. Performance on other products, languages and modern generators is unknown. The link checker extracts an ASIN and attempts to retrieve Amazon India product pages without bypassing access restrictions. No trained BiLSTM is included.
 
 Submitted review text is stored locally in `backend/history.sqlite3`. The website has no authentication and is not suitable for public deployment without security and privacy controls.
+
+Contributors:
+Vatsal Agarwal
+Vansh Saxena
