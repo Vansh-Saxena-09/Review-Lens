@@ -28,7 +28,7 @@ Start the server:
 python -m uvicorn app:app --app-dir backend --host 127.0.0.1 --port 8000
 ```
 
-Open `http://127.0.0.1:8000/`. Restart the server after training so it loads the new model. Until then, prediction requests return an error rather than a simulated result. The static frontend does not require Node.
+Open `https://review-lens-udz4.onrender.com`..
 
 Run the backend tests:
 
