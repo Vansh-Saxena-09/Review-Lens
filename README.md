@@ -1,49 +1,97 @@
-# Review Lens (Fake review detection)
+# Review Lens – Fake Review Detection
 
-A local review-text analysis website under reconstruction. The intended model estimates whether text resembles the computer-generated (CG) or original (OR) reviews in its training dataset. **It does not establish fraud or authenticity.**
+Review Lens is a website that checks reviews and predicts whether they are Computer-Generated (CG) or Original (OR).
 
-## Current status
+**Note:** It only checks writing patterns. It cannot prove whether a review or product is fake or real.
 
-The original website, model, dataset and evaluation files were missing from this folder. The replacement includes a newly trained review-text model and an Amazon-link evidence checklist. Its held-out review-level accuracy is 94.71% on the included dataset; this is not an accuracy measurement for product authenticity. See [PROJECT_STATUS.md](PROJECT_STATUS.md) for verification and limitations.
+## Project Status
+
+The old website, model, and dataset were missing. A new model and Amazon product link checker have been added.
+
+The model achieved **94.71% accuracy** on the test dataset.
+
+This score is only for review checking, not product checking.
 
 ## Setup
 
-Install Python 3.11 or 3.12, then from the project directory install the backend dependencies:
+**Step 1: Install Python**
+
+Install Python 3.11 or 3.12.
+
+**Step 2: Install Libraries**
 
 ```bash
 python -m pip install -r backend/requirements.txt
 ```
 
-Provide a legally obtained CSV containing a `text_` (or `text`) column and a `label` column containing `CG` and `OR`. Train the model:
+**Step 3: Add Dataset**
+
+Use a CSV file with two columns:
+- `text_` or `text` – Review text.
+- `label` – CG or OR.
+
+**Step 4: Train the Model**
 
 ```bash
 python backend/train.py backend/data/reviews.csv
 ```
 
-Training writes a model and measured evaluation metadata to `backend/models/`. The script refuses to replace existing artifacts unless `--overwrite` is supplied. Back up existing artifacts before retraining. Only load joblib artifacts from sources you trust; deserializing a malicious artifact can execute code.
+The model will be saved in `backend/models/`.
 
-Start the server:
+**Step 5: Start the Website**
 
 ```bash
 python -m uvicorn app:app --app-dir backend --host 127.0.0.1 --port 8000
 ```
 
-Open `https://review-lens-udz4.onrender.com`..
+Open: https://review-lens-udz4.onrender.com
 
-Run the backend tests:
+**Step 6: Test the Backend**
 
 ```bash
 python -m unittest discover -s backend/tests -v
 ```
 
-Thirteen backend tests passed, including mocked retrieval and model-routing cases. A live Amazon India request retrieved the title for one listing but exposed no review text. Review prediction, CSV export, and mobile layout have not been fully verified end to end.
+All 13 backend tests passed. Some website features still need testing.
 
-## Amazon listing check
+## Amazon Product Check
 
-Paste a direct supported Amazon `/dp/<ASIN>` or `/gp/product/<ASIN>` HTTPS link. Shortened links are not supported. You can optionally enter listing details and your own seller-authorization check. The app attempts to retrieve a bounded public Amazon India listing; other marketplaces are not automatically fetched. It analyzes review text only if present in the returned page. Amazon may block access or omit reviews. User-supplied information is not verified, and the app cannot issue a counterfeit verdict. An optional review-text prediction is a separate writing-pattern estimate, not evidence that the product is genuine or fake. Listing checks are not saved in history; separate review analyses are saved locally.
+Users can paste a direct Amazon product link.
 
-## Dataset and limitations
+The website tries to get product details and reviews.
 
-The included CSV was downloaded from the [Fake-Reviews-Detection repository](https://github.com/SayamAlt/Fake-Reviews-Detection). Its SHA-256 is `ea03422988824bc917b5f7217e3867e27b597c647d5261adfae73cd7a85e1e1a`. The repository states CC BY 4.0 generally but does not establish the dataset's provenance; verify rights independently before reuse or redistribution. The model's training split is a random stratified review-level split; related or duplicated reviews can cross partitions. Performance on other products, languages and modern generators is unknown. The link checker extracts an ASIN and attempts to retrieve Amazon India product pages without bypassing access restrictions. No trained BiLSTM is included.
+- Only direct Amazon HTTPS links are supported.
+- Only Amazon India pages are checked.
+- Amazon may block access or hide reviews.
+- Product details entered by users are not verified.
+- The website cannot confirm if a product is real or fake.
 
-Submitted review text is stored locally in `backend/history.sqlite3`. The website has no authentication and is not suitable for public deployment without security and privacy controls.
+## Dataset Details
+
+The dataset was downloaded from:
+
+[Fake Reviews Detection – GitHub](https://github.com/SayamAlt/Fake-Reviews-Detection)
+
+Its usage rights should be checked before sharing or reusing it.
+
+## Limitations
+
+- Similar reviews may appear in training and testing data.
+- Results may differ on other datasets.
+- Different languages may affect accuracy.
+- AI-generated reviews may be harder to detect.
+- No trained BiLSTM model is included.
+
+## Data Storage
+
+Review history is saved locally in:
+
+`backend/history.sqlite3`
+
+The website has no login system. Extra security is needed before public use.
+
+## Conclusion
+
+Review Lens uses machine learning to check whether reviews look computer-generated or original. It also checks Amazon product links.
+
+It helps users understand review patterns, but its results are only predictions, not proof.
