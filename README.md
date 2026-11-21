@@ -10,7 +10,7 @@ The old website, model, and dataset were missing. A new model and Amazon product
 
 The model achieved **94.71% accuracy** on the test dataset.
 
-This score is only for review checking, not product checking.
+This score is only for review the checking, not product checking.
 
 ## Setup
 
