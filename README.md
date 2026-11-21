@@ -2,7 +2,7 @@
 
 Review Lens is a website that checks reviews and predicts whether they are Computer-Generated (CG) or Original (OR).
 
-**Note:** It only checks writing patterns. It cannot prove whether a review or product is fake or real.
+**Note:** It only checks writing the  patterns. It cannot prove whether a review or product is fake or real.
 
 ## Project Status
 
